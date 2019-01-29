@@ -6,6 +6,7 @@ using UnityEngine;
 public class Rocket : MonoBehaviour
 {
     Rigidbody rocketRigitBody;
+    [SerializeField] float turningSpeed = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,11 +37,13 @@ public class Rocket : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            print("Turning left");
+            //print("Turning left");
+            transform.Rotate(Vector3.forward * Time.deltaTime * turningSpeed);
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            print("Turning right");
+            //print("Turning right");
+            transform.Rotate(-Vector3.forward * Time.deltaTime * turningSpeed);
         }
     }
 }
