@@ -38,12 +38,12 @@ public class Rocket : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             //print("Turning left");
-            transform.Rotate(Vector3.forward * Time.deltaTime * turningSpeed);
+            transform.Rotate(Vector3.forward * (Time.deltaTime * turningSpeed));
         }
         else if (Input.GetKey(KeyCode.S))
         {
             //print("Turning right");
-            transform.Rotate(-Vector3.forward * Time.deltaTime * turningSpeed);
+            transform.Rotate(-Vector3.forward * (Time.deltaTime * turningSpeed));
         }
     }
 }
