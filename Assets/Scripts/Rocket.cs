@@ -7,10 +7,12 @@ public class Rocket : MonoBehaviour
 {
     Rigidbody rocketRigitBody;
     [SerializeField] float turningSpeed = 5f;
+    AudioSource rocketThrustSound;
     // Start is called before the first frame update
     void Start()
     {
         rocketRigitBody = GetComponent<Rigidbody>();
+        rocketThrustSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -21,23 +23,33 @@ public class Rocket : MonoBehaviour
 
     private void ProcessInput()
     {
-        //if (Input.GetKey(KeyCode.Space) && Input.GetKey(KeyCode.S))
-        //{
-        //    print("space and right pressed");
-        //}
-        //else if (Input.GetKey(KeyCode.Space) && Input.GetKey(KeyCode.A))
-        //{
-        //    print("space and left pressed");
-        //}
+
+        if (Input.GetKeyDown(KeyCode.Space)) 
+        {
+            rocketThrustSound.volume = 1.0f;
+            rocketThrustSound.Play();
+        }
+
         if (Input.GetKey(KeyCode.Space))
         {
-            //print("Thrusting");
             rocketRigitBody.AddRelativeForce(Vector3.up);
+        } else
+        {
+            rocketThrustSound.volume = rocketThrustSound.volume - 0.1f;
+            if (rocketThrustSound.volume == 0)
+            {
+                rocketThrustSound.Stop();
+            }
         }
+
+        //if (Input.GetKeyUp(KeyCode.Space))
+        //{
+        //    rocketThrustSound.volume = 0.0f;
+        //    rocketThrustSound.Stop();
+        //}
 
         if (Input.GetKey(KeyCode.A))
         {
-            //print("Turning left");
             transform.Rotate(Vector3.forward * (Time.deltaTime * turningSpeed));
         }
         else if (Input.GetKey(KeyCode.S))
