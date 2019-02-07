@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
 {
     Rigidbody rocketRigitBody;
     [SerializeField] float turningSpeed = 5f;
     [SerializeField] float thrustSpeed = 10f;
+    [SerializeField] int nextLevel;
     AudioSource rocketThrustSound;
+    enum State { alive, dead, levelingUp };
+
+    State state = State.alive;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,22 +24,45 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Thrust();
-        Rotate();
+        if (state == State.alive)
+        {
+            Thrust();
+            Rotate();
+        }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        if ( state != State.alive)
+        {
+            return;
+        }
+
         if (collision.gameObject.tag == "friendly")
         {
             Debug.Log("ok");
         } else if (collision.gameObject.tag == "goal")
         {
+            state = State.levelingUp;
+            Invoke("loadScenes", 2f);
             Debug.Log("You win!");
         } else
         {
+            state = State.dead;
+            Invoke("playerDeath", 2f);
             Debug.Log("You died");
         }
+    }
+
+    void loadScenes()
+    {
+        SceneManager.LoadScene(nextLevel);
+    }
+
+    void playerDeath()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void Thrust()
