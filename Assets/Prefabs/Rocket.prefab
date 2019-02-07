@@ -431,6 +431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turningSpeed: 150
   thrustSpeed: 800
+  nextLevel: 0
 --- !u!82 &7899645464363870470
 AudioSource:
   m_ObjectHideFlags: 0
@@ -441,7 +442,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1250fc8cd46a3cc44bbd247c199b9e53, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
