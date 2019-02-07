@@ -432,6 +432,7 @@ MonoBehaviour:
   turningSpeed: 150
   thrustSpeed: 800
   nextLevel: 0
+  rocketThrust: {fileID: 8300000, guid: 1e204febf603e714091a4b199ed5ac3b, type: 3}
 --- !u!82 &7899645464363870470
 AudioSource:
   m_ObjectHideFlags: 0

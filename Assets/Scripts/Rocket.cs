@@ -8,6 +8,8 @@ public class Rocket : MonoBehaviour
     [SerializeField] float thrustSpeed = 10f;
     [SerializeField] int nextLevel;
     AudioSource rocketThrustSound;
+    [SerializeField] AudioClip rocketThrust;
+
     enum State { alive, dead, levelingUp };
 
     State state = State.alive;
@@ -71,7 +73,7 @@ public class Rocket : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rocketThrustSound.volume = 1.0f;
-            rocketThrustSound.Play();
+            rocketThrustSound.PlayOneShot(rocketThrust);
         }
 
         if (Input.GetKey(KeyCode.Space))
