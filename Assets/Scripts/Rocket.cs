@@ -7,8 +7,14 @@ public class Rocket : MonoBehaviour
     [SerializeField] float turningSpeed = 5f;
     [SerializeField] float thrustSpeed = 10f;
     [SerializeField] int nextLevel;
-    AudioSource rocketThrustSound;
+    AudioSource audioPlayer;
     [SerializeField] AudioClip rocketThrust;
+    [SerializeField] AudioClip rocketDeath;
+    [SerializeField] AudioClip rocketWin;
+
+    [SerializeField] ParticleSystem thrustParticles;
+    [SerializeField] ParticleSystem winParticles;
+    [SerializeField] ParticleSystem deathParticles;
 
     enum State { alive, dead, levelingUp };
 
@@ -20,7 +26,7 @@ public class Rocket : MonoBehaviour
     void Start()
     {
         rocketRigitBody = GetComponent<Rigidbody>();
-        rocketThrustSound = GetComponent<AudioSource>();
+        audioPlayer = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -49,11 +55,19 @@ public class Rocket : MonoBehaviour
             state = State.levelingUp;
             Invoke("loadScenes", 2f);
             Debug.Log("You win!");
+            audioPlayer.Stop();
+            thrustParticles.Stop();
+            winParticles.Play();
+            audioPlayer.PlayOneShot(rocketWin);
         } else
         {
             state = State.dead;
             Invoke("playerDeath", 2f);
             Debug.Log("You died");
+            audioPlayer.Stop();
+            thrustParticles.Stop();
+            deathParticles.Play();
+            audioPlayer.PlayOneShot(rocketDeath);
         }
     }
 
@@ -70,23 +84,25 @@ public class Rocket : MonoBehaviour
     private void Thrust()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rocketThrustSound.volume = 1.0f;
-            rocketThrustSound.PlayOneShot(rocketThrust);
-        }
-
+        // Apply force to rigid body
         if (Input.GetKey(KeyCode.Space))
         {
             rocketRigitBody.AddRelativeForce(Vector3.up * (Time.deltaTime * thrustSpeed));
+            if (!audioPlayer.isPlaying)
+            {
+                audioPlayer.PlayOneShot(rocketThrust);
+            }
+            thrustParticles.Play();
         }
         else
         {
-            rocketThrustSound.volume = rocketThrustSound.volume - 0.1f;
-            if (rocketThrustSound.volume == 0)
+            if (state != State.dead && state != State.levelingUp)
             {
-                rocketThrustSound.Stop();
+                audioPlayer.Stop();
+                thrustParticles.Stop();
             }
+            
+            
         }
     }
 
