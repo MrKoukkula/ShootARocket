@@ -433,7 +433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turningSpeed: 150
-  thrustSpeed: 800
+  thrustSpeed: 1000
   nextLevel: 1
   rocketThrust: {fileID: 8300000, guid: 1e204febf603e714091a4b199ed5ac3b, type: 3}
   rocketDeath: {fileID: 8300000, guid: ff44c80af8adbfb4faf84a3fca7d7f2f, type: 3}
