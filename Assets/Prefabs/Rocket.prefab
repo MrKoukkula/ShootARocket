@@ -438,6 +438,7 @@ MonoBehaviour:
   rocketThrust: {fileID: 8300000, guid: 1e204febf603e714091a4b199ed5ac3b, type: 3}
   rocketDeath: {fileID: 8300000, guid: ff44c80af8adbfb4faf84a3fca7d7f2f, type: 3}
   rocketWin: {fileID: 8300000, guid: 077e38adaac39d8439dad9b0f7f29b6f, type: 3}
+  levelLoadDelay: 2
   thrustParticles: {fileID: 998189801332498483}
   winParticles: {fileID: 2388305015690888330}
   deathParticles: {fileID: 2177387201062205482}
@@ -554,7 +555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4940884351362868, guid: a3553fd250eb92d4091bebde350c6739, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.09
+      value: -1.14
       objectReference: {fileID: 0}
     - target: {fileID: 4940884351362868, guid: a3553fd250eb92d4091bebde350c6739, type: 3}
       propertyPath: m_LocalPosition.z

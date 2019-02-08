@@ -11,7 +11,7 @@ public class Rocket : MonoBehaviour
     [SerializeField] AudioClip rocketThrust;
     [SerializeField] AudioClip rocketDeath;
     [SerializeField] AudioClip rocketWin;
-
+    [SerializeField] float levelLoadDelay;
     [SerializeField] ParticleSystem thrustParticles;
     [SerializeField] ParticleSystem winParticles;
     [SerializeField] ParticleSystem deathParticles;
@@ -53,7 +53,7 @@ public class Rocket : MonoBehaviour
         } else if (collision.gameObject.tag == "goal")
         {
             state = State.levelingUp;
-            Invoke("loadScenes", 2f);
+            Invoke("loadScenes", levelLoadDelay);
             Debug.Log("You win!");
             audioPlayer.Stop();
             thrustParticles.Stop();
@@ -62,7 +62,7 @@ public class Rocket : MonoBehaviour
         } else
         {
             state = State.dead;
-            Invoke("playerDeath", 2f);
+            Invoke("playerDeath", levelLoadDelay);
             Debug.Log("You died");
             audioPlayer.Stop();
             thrustParticles.Stop();
