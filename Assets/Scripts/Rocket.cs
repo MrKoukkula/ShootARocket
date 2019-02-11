@@ -7,7 +7,7 @@ public class Rocket : MonoBehaviour
     Rigidbody rocketRigitBody;
     [SerializeField] float turningSpeed = 5f;
     [SerializeField] float thrustSpeed = 10f;
-    [SerializeField] int nextLevel;
+    //[SerializeField] int nextLevel;
     AudioSource audioPlayer;
     [SerializeField] AudioClip rocketThrust;
     [SerializeField] AudioClip rocketDeath;
@@ -91,7 +91,16 @@ public class Rocket : MonoBehaviour
 
     void loadScenes()
     {
-        SceneManager.LoadScene(nextLevel);
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        } else
+        {
+            SceneManager.LoadScene(0);
+        }
+        
     }
 
     void playerDeath()
