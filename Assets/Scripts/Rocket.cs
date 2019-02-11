@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
@@ -15,6 +16,7 @@ public class Rocket : MonoBehaviour
     [SerializeField] ParticleSystem thrustParticles;
     [SerializeField] ParticleSystem winParticles;
     [SerializeField] ParticleSystem deathParticles;
+    bool collisionsEnabled = true;
 
     enum State { alive, dead, levelingUp };
 
@@ -37,12 +39,28 @@ public class Rocket : MonoBehaviour
             Thrust();
             Rotate();
         }
+
+        if (Debug.isDebugBuild)
+        {
+            respondToDebugKeys();
+        }
         
+        
+    }
+
+    private void respondToDebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.L)) {
+            loadScenes();
+        } else if (Input.GetKeyDown(KeyCode.C))
+        {
+            collisionsEnabled = !collisionsEnabled;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if ( state != State.alive)
+        if ( state != State.alive || !collisionsEnabled)
         {
             return;
         }
