@@ -136,18 +136,21 @@ public class Rocket : MonoBehaviour
     private void Rotate()
     {
 
-        rocketRigitBody.freezeRotation = true; // stop environment physics rotation
+        
 
         if (Input.GetKey(KeyCode.A))
         {
+            rocketRigitBody.freezeRotation = true; // stop environment physics rotation
             transform.Rotate(Vector3.forward * (Time.deltaTime * turningSpeed));
+            rocketRigitBody.freezeRotation = false; // continue environment physics rotation
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            //print("Turning right");
+            rocketRigitBody.freezeRotation = true; // stop environment physics rotation
             transform.Rotate(-Vector3.forward * (Time.deltaTime * turningSpeed));
+            rocketRigitBody.freezeRotation = false; // continue environment physics rotation
         }
 
-        rocketRigitBody.freezeRotation = false; // continue environment physics rotation
+        
     }
 }
